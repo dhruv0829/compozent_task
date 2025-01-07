@@ -8,7 +8,6 @@
 <body>
     <h1>Book Library</h1>
 
-    <!-- Add Book Form -->
     <h2>Add a Book</h2>
     <form id="add-book-form">
         <input type="text" id="title" placeholder="Book Title" required>
@@ -18,11 +17,9 @@
         <button type="submit">Add Book</button>
     </form>
 
-    <!-- Display Book List -->
     <h2>All Books</h2>
     <ul id="book-list"></ul>
 
-    <!-- Get Book by ID -->
     <h2>Get a Book by ID</h2>
     <form id="get-book-form">
         <input type="number" id="book-id" placeholder="Book ID" required>
@@ -30,7 +27,6 @@
     </form>
     <div id="book-details"></div>
 
-    <!-- Update Book Form -->
     <h2>Update Book</h2>
     <form id="update-book-form">
         <input type="number" id="update-id" placeholder="Book ID to update" required>
@@ -41,7 +37,6 @@
         <button type="submit">Update Book</button>
     </form>
 
-    <!-- Delete Book Form -->
     <h2>Delete a Book</h2>
     <form id="delete-book-form">
         <input type="number" id="delete-id" placeholder="Book ID to delete" required>
@@ -49,7 +44,7 @@
     </form>
 
     <script>
-        // Fetch and display all books
+      
         async function fetchBooks() {
             const res = await fetch('/books');
             const books = await res.json();
@@ -62,9 +57,9 @@
             });
         }
 
-        // Add a new book
+
         document.getElementById('add-book-form').addEventListener('submit', async (e) => {
-            e.preventDefault();  // Prevent page reload
+            e.preventDefault(); 
             const data = {
                 title: document.getElementById('title').value,
                 author: document.getElementById('author').value,
@@ -76,10 +71,10 @@
                 headers: {'Content-Type': 'application/json'}, 
                 body: JSON.stringify(data)
             });
-            fetchBooks();  // Refresh the book list
+            fetchBooks();  
         });
 
-        // Get a book by ID
+      
         document.getElementById('get-book-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const bookId = document.getElementById('book-id').value;
@@ -93,7 +88,7 @@
             }
         });
 
-        // Update a book by ID
+  
         document.getElementById('update-book-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const id = document.getElementById('update-id').value;
@@ -108,18 +103,18 @@
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(data)
             });
-            fetchBooks();  // Refresh the book list
+            fetchBooks(); 
         });
 
-        // Delete a book by ID
+       
         document.getElementById('delete-book-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const bookId = document.getElementById('delete-id').value;
             await fetch(`/books/${bookId}`, { method: 'DELETE' });
-            fetchBooks();  // Refresh the book list
+            fetchBooks();  
         });
 
-        // Initial fetch of books when the page loads
+     
         fetchBooks();
     </script>
 </body>
